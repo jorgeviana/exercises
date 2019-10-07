@@ -14,9 +14,9 @@ public class SocialMediaNetworks {
         networks = new HashSet<>(asList("facebook", "twitter", "youtube", "instagram", "snapchat"));
     }
 
-    public String and(String networksOne, String networksTwo) {
-        Set<String> n1 = split(networksOne);
-        Set<String> n2 = split(networksTwo);
+    public String and(String set1, String set2) {
+        Set<String> n1 = split(set1);
+        Set<String> n2 = split(set2);
 
         n1.retainAll(networks);
         n2.retainAll(networks);
