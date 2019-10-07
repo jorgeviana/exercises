@@ -6,20 +6,20 @@ import java.util.Set;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 
-public class BaseSet {
+public abstract class BaseSet {
 
-    protected Set<String> tokens;
+    abstract Set<String> getValidTokens();
 
     public String and(String set1, String set2) {
-        Set<String> n1 = split(set1);
-        Set<String> n2 = split(set2);
+        Set<String> s1 = split(set1);
+        Set<String> s2 = split(set2);
 
-        n1.retainAll(getValidTokens());
-        n2.retainAll(getValidTokens());
+        s1.retainAll(getValidTokens());
+        s2.retainAll(getValidTokens());
 
-        n1.retainAll(n2);
+        s1.retainAll(s2);
 
-        return format(n1);
+        return format(s1);
     }
 
     public String or(String set1, String set2) {
@@ -34,10 +34,6 @@ public class BaseSet {
         result.addAll(s2);
 
         return format(result);
-    }
-
-    private Set<String> getValidTokens() {
-        return tokens;
     }
 
     private HashSet<String> split(String networksOne) {
