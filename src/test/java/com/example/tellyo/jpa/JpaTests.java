@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Example;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
@@ -16,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TellyoApplicationTests {
+public class JpaTests {
 
 	@Autowired
 	private VideoRepository videoRepository;
@@ -67,8 +68,14 @@ public class TellyoApplicationTests {
 	}
 
 	@Test
-	public void loading_lazily() {
+	public void loading_videos_lazily() {
 		log.info(" ###  Fetching all videos");
 		assertThat(videoRepository.findAll()).hasSize(1);
+	}
+
+	@Test
+	public void loading_daily_statistics_loads_video_eagerly() {
+		log.info(" ###  Fetching all stats");
+		assertThat(dailyStatisticsRepository.findAll()).hasSize(2);
 	}
 }
